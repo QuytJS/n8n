@@ -1,45 +1,16 @@
 services:
   - type: web
-    name: n8n-service
+    name: n8n
     env: image
     image:
       url: docker.io/n8nio/n8n:latest
-
     plan: starter
     envVars:
-      - key: DB_TYPE
-        value: postgresdb
-      - key: DB_POSTGRESDB_HOST
-        fromDatabase:
-          name: n8n-db
-          property: host
-      - key: DB_POSTGRESDB_PORT
-        fromDatabase:
-          name: n8n-db
-          property: port
-      - key: DB_POSTGRESDB_DATABASE
-        fromDatabase:
-          name: n8n-db
-          property: database
-      - key: DB_POSTGRESDB_USER
-        fromDatabase:
-          name: n8n-db
-          property: user
-      - key: DB_POSTGRESDB_PASSWORD
-        fromDatabase:
-          name: n8n-db
-          property: password
-      - key: DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED
-        value: "false"
-      - key: N8N_ENCRYPTION_KEY
-        generateValue: true
+      - key: PORT
+        value: "5678"
       - key: N8N_PORT
-        value: "10000"
-      - key: WEBHOOK_URL
-        sync: false
-
-databases:
-  - name: n8n-db
-    databaseName: n8n
-    user: n8n_user
-    plan: starter
+        value: "5678"
+      - key: NODE_OPTIONS
+        value: "--max-old-space-size=400"
+      - key: N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS
+        value: "false"
